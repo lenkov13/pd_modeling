@@ -60,34 +60,33 @@ $$ \lambda = \frac{S}{1 - RR} $$
 - $$RR$$ — **recovery rate** — доля номинала, восстанавливаемая при дефолте
 - $$LGD = 1 - RR$$ — потери при дефолте
 
-### Вывод формулы
-
-Рассмотрим две инвестиции на малый период времени $$\Delta t$$:[5]
-
-**Безрисковая облигация**: доходность $$e^{r \Delta t}$$
-
-**Рисковая облигация**: доходность $$e^{(r + S) \Delta t}$$, но с вероятностью дефолта $$\lambda \Delta t$$, при котором инвестор получит $$RR$$[5]
-
-При условии безарбитражности ожидаемые доходности должны совпадать:
-
-$$ e^{r \Delta t} = (1 - \lambda \Delta t) \cdot e^{(r+S) \Delta t} + \lambda \Delta t \cdot RR \cdot e^{(r+S) \Delta t} $$
-
-Для малых $$\Delta t$$ применяем приближение $$e^{x} \approx 1 + x$$:
-
-$$ 1 + r \Delta t = (1 - \lambda \Delta t)(1 + (r+S) \Delta t) + \lambda \Delta t \cdot RR \cdot (1 + (r+S) \Delta t) $$
-
-Раскрывая скобки и отбрасывая члены второго порядка малости $$(\Delta t)^2$$:
-
-$$ 1 + r \Delta t = 1 + (r+S) \Delta t - \lambda \Delta t + \lambda \Delta t \cdot RR $$
-
-$$ 0 = S \Delta t - \lambda \Delta t + \lambda \Delta t \cdot RR $$
-
-$$ S = \lambda - \lambda \cdot RR = \lambda(1 - RR) $$
-
-Следовательно:
-
-$$ \lambda = \frac{S}{1 - RR} $$
-
+> ### Вывод формулы
+>
+> Рассмотрим две инвестиции на малый период времени $$\Delta t$$:
+> 
+> **Безрисковая облигация**: доходность $$e^{r \Delta t}$$
+>
+> **Рисковая облигация**: доходность $$e^{(r + S) \Delta t}$$, но с вероятностью дефолта $$\lambda \Delta t$$, при котором инвестор получит $$RR$$
+>
+> При условии безарбитражности ожидаемые доходности должны совпадать:
+>
+> $$ e^{r \Delta t} = (1 - \lambda \Delta t) \cdot e^{(r+S) \Delta t} + \lambda \Delta t \cdot RR \cdot e^{(r+S) \Delta t} $$
+>
+> Для малых $$\Delta t$$ применяем приближение $$e^{x} \approx 1 + x$$:
+>
+> $$ 1 + r \Delta t = (1 - \lambda \Delta t)(1 + (r+S) \Delta t) + \lambda \Delta t \cdot RR \cdot (1 + (r+S) \Delta t) $$
+>
+> Раскрывая скобки и отбрасывая члены второго порядка малости $$(\Delta t)^2$$:
+>
+> $$ 1 + r \Delta t = 1 + (r+S) \Delta t - \lambda \Delta t + \lambda \Delta t \cdot RR $$
+>
+> $$ 0 = S \Delta t - \lambda \Delta t + \lambda \Delta t \cdot RR $$
+>
+> $$ S = \lambda - \lambda \cdot RR = \lambda(1 - RR) $$
+>
+> Следовательно:
+>
+> $$ \lambda = \frac{S}{1 - RR} $$
 
 # Reduced-form модели
 
@@ -98,90 +97,89 @@ $$ \lambda = \frac{S}{1 - RR} $$
 3. **Непредсказуемость дефолта**. Дефолт в reduced form models является **внезапным и непредсказуемым событием** — он наступает без предупреждения. Даже при очень коротких горизонтах времени существует ненулевая вероятность дефолта, что создает краткосрочную неопределенность.[5]
 4. **Рыночная информация как источник данных**. Вся информация о кредитном риске извлекается из **рыночных цен финансовых инструментов** — облигаций, CDS спредов, кредитных спредов. Модели калибруются на наблюдаемых рыночных данных.
 
-## Связь с интенсивностью дефолта
+## Интенсивность дефолта
 
-В reduced-form моделях используется **hazard rate** (интенсивность дефолта) $$\lambda(t)$$:[1]
+Как было сказано, в reduced-form моделях используется **hazard rate** (интенсивность дефолта) $$\lambda(t)$$:[1]
 
 $$ S(t) = e^{-\int_0^t \lambda(u) du} $$
 
 где $$S(t)$$ — survival probability (вероятность выживания до момента $$t$$).[1]
 
----
-Как выводятся данные формулы ?
-
-**Функция выживания** $$S(t)$$ — вероятность того, что заемщик НЕ дефолтнет до момента $$t$$:
-
-$$ S(t) = P(\tau > t) $$
-
-где $$\tau$$ — случайное время дефолта.
-
-**Интенсивность дефолта** $$\lambda(t)$$ — мгновенная условная вероятность дефолта:
-
-$$ \lambda(t) = \lim_{\Delta t \to 0} \frac{P(t < \tau \leq t + \Delta t \mid \tau > t)}{\Delta t} $$
-
-### Связь c условной вероятностью
-
-Рассмотрим вероятность выживания в момент $$t + \Delta t$$:
-
-$$ S(t + \Delta t) = P(\tau > t + \Delta t) $$
-
-Эту вероятность можно разложить через условную вероятность:
-
-$$ S(t + \Delta t) = P(\tau > t + \Delta t \mid \tau > t) \cdot P(\tau > t) $$
-
-$$ S(t + \Delta t) = P(\tau > t + \Delta t \mid \tau > t) \cdot S(t) $$
-
-### Выражение через интенсивность
-
-Условная вероятность **НЕ** дефолтнуть на интервале $$[t, t + \Delta t]$$:
-
-$$ P(\tau > t + \Delta t \mid \tau > t) = 1 - P(t < \tau \leq t + \Delta t \mid \tau > t) $$
-
-По определению интенсивности:
-
-$$ P(t < \tau \leq t + \Delta t \mid \tau > t) = \lambda(t) \Delta t + o(\Delta t) $$
-
-где $$o(\Delta t)$$ — член высшего порядка малости.
-
-Следовательно:
-
-$$ P(\tau > t + \Delta t \mid \tau > t) = 1 - \lambda(t) \Delta t + o(\Delta t) $$
-
-### Подстановка в уравнение
-
-$$ S(t + \Delta t) = [1 - \lambda(t) \Delta t] \cdot S(t) + o(\Delta t) $$
-
-$$ S(t + \Delta t) - S(t) = -\lambda(t) S(t) \Delta t + o(\Delta t) $$
-
-Разделим на $$\Delta t$$ и устремим $$\Delta t \to 0$$:
-
-$$ \frac{S(t + \Delta t) - S(t)}{\Delta t} = -\lambda(t) S(t) $$
-
-По определению производной:
-
-$$ \frac{dS(t)}{dt} = -\lambda(t) S(t) $$
-
-### Решение дифференциального уравнения
-
-Это обыкновенное дифференциальное уравнение (ОДУ) с разделяющимися переменными:
-
-$$ \frac{dS(t)}{S(t)} = -\lambda(t) dt $$
-
-Интегрируем обе части от 0 до $$t$$:
-
-$$ \int_0^t \frac{dS(u)}{S(u)} = -\int_0^t \lambda(u) du $$
-
-$$ \ln S(t) - \ln S(0) = -\int_0^t \lambda(u) du $$
-
-Начальное условие: $$S(0) = 1$$ (в начальный момент заемщик точно жив, т.е. не дефолтнул):
-
-$$ \ln S(t) = -\int_0^t \lambda(u) du $$
-
-Потенцируя обе части:
-
-$$ S(t) = \exp\left(-\int_0^t \lambda(u) du\right) $$
-
-Что мы и получили в начале
+>### Как выводятся данные формулы ?
+>
+>**Функция выживания** $$S(t)$$ — вероятность того, что заемщик НЕ дефолтнет до момента $$t$$:
+>
+>$$ S(t) = P(\tau > t) $$
+>
+>где $$\tau$$ — случайное время дефолта.
+>
+>**Интенсивность дефолта** $$\lambda(t)$$ — мгновенная условная вероятность дефолта:
+>
+>$$ \lambda(t) = \lim_{\Delta t \to 0} \frac{P(t < \tau \leq t + \Delta t \mid \tau > t)}{\Delta t} $$
+>
+>#### Связь c условной вероятностью
+>
+> Рассмотрим вероятность выживания в момент $$t + \Delta t$$:
+>
+> $$ S(t + \Delta t) = P(\tau > t + \Delta t) $$
+>
+> Эту вероятность можно разложить через условную вероятность:
+>
+> $$ S(t + \Delta t) = P(\tau > t + \Delta t \mid \tau > t) \cdot P(\tau > t) $$
+> 
+> $$ S(t + \Delta t) = P(\tau > t + \Delta t \mid \tau > t) \cdot S(t) $$
+> 
+> #### Выражение через интенсивность
+>
+> Условная вероятность **НЕ** дефолтнуть на интервале $$[t, t + \Delta t]$$:
+> 
+>$$ P(\tau > t + \Delta t \mid \tau > t) = 1 - P(t < \tau \leq t + \Delta t \mid \tau > t) $$
+>
+>По определению интенсивности:
+>
+>$$ P(t < \tau \leq t + \Delta t \mid \tau > t) = \lambda(t) \Delta t + o(\Delta t) $$
+>
+>где $$o(\Delta t)$$ — член высшего порядка малости.
+>
+> Следовательно:
+>
+> $$ P(\tau > t + \Delta t \mid \tau > t) = 1 - \lambda(t) \Delta t + o(\Delta t) $$
+>
+> #### Подстановка в уравнение
+>
+>$$ S(t + \Delta t) = [1 - \lambda(t) \Delta t] \cdot S(t) + o(\Delta t) $$
+>
+>$$ S(t + \Delta t) - S(t) = -\lambda(t) S(t) \Delta t + o(\Delta t) $$
+>
+>Разделим на $$\Delta t$$ и устремим $$\Delta t \to 0$$:
+>
+>$$ \frac{S(t + \Delta t) - S(t)}{\Delta t} = -\lambda(t) S(t) $$
+>
+>По определению производной:
+>
+>$$ \frac{dS(t)}{dt} = -\lambda(t) S(t) $$
+>
+>#### Решение дифференциального уравнения
+>
+>Это обыкновенное дифференциальное уравнение (ОДУ) с разделяющимися переменными:
+>
+>$$ \frac{dS(t)}{S(t)} = -\lambda(t) dt $$
+>
+>Интегрируем обе части от 0 до $$t$$:
+>
+>$$ \int_0^t \frac{dS(u)}{S(u)} = -\int_0^t \lambda(u) du $$
+>
+>$$ \ln S(t) - \ln S(0) = -\int_0^t \lambda(u) du $$
+>
+>Начальное условие: $$S(0) = 1$$ (в начальный момент заемщик точно жив, т.е. не дефолтнул):
+>
+>$$ \ln S(t) = -\int_0^t \lambda(u) du $$
+>
+>Потенцируя обе части:
+>
+>$$ S(t) = \exp\left(-\int_0^t \lambda(u) du\right) $$
+>
+>Что мы и получили в начале
 
 ## Безусловная вероятность дефолта:
 
@@ -192,39 +190,14 @@ $$ PD(t) = P(\tau \leq t) = 1 - S(t) $$
 # Structured form approach (coming soon)
 
 #  Список литературы
-### Стандарты и нормативная база
-- IFRS 9 (2014, вступил в силу 2018)
-
-Международный стандарт финансовой отчетности, требующий:
-- Forward-looking оценку кредитных потерь
-- Point-in-time параметры PD, LGD, EAD
-- Трехстадийную модель обесценения
-
-- Basel III (Basel Committee on Banking Supervision)
-
-Регуляторные требования к банковскому капиталу:
-- IRB approach (Internal Ratings-Based) для расчета RWA (Risk-Weighted Assets)
-- Through-the-cycle PD и downturn LGD
-- PD input floor: 5 bps с 2023 года]
+- IFRS 9 
+- Basel III
+- Серия статей Darrell Duffie, написанных в 90х
+- Материалы из файлы notes.txt
 
 ## Ресурсы
 
 - **GARP** (Global Association of Risk Professionals) — white papers по IFRS 9 ECL calculation[1]
-- **KPMG, PwC** — практические руководства по внедрению IFRS 9[10][7]
-- **Bank of Russia Working Papers** — исследования PD моделей для российского рынка[3]
-
-***
-
-[1](https://www.garp.org/hubfs/Whitepapers/a1Z1W0000054wttUAA.pdf)
-[2](https://www.garp.org/risk-intelligence/credit/basel-iii-the-impact-of-the-new-probability-of-default-input-floor)
-[3]
-[4](https://www.cpdbox.com/ifrs9-ecl-loss-rate-probability-of-default-examples/)
-[5](https://didattica.unibocconi.it/mypage/upload/51724_20100707_111731_DEFAULTRECOVERYREVIEW.PDF)
-[6](https://www.bundesbank.de/resource/blob/704154/31bac58987486c54742e606a9f17abaf/mL/2004-08-01-dkp-02-data.pdf)
-[7](https://www.pwc.com/hu/hu/szolgaltatasok/ifrs/ifrs_9/ifrs9_kiadvanyok/IFRS%209%20Impairment%20-%20Intercompany%20loans%20In%20depthINT(April%202019).pdf)
-[8](https://cfjournal.hse.ru/article/download/10458/11996/)
-[9](https://www.pkf-l.com/insights/ifrs-9-the-two-ways-of-calculating-ecls/)
-[10](https://assets.kpmg.com/content/dam/kpmgsites/in/pdf/2025/01/expected-credit-loss-ecl.pdf)
-
-DS + Structured form Aprroach
+- **KPMG, PwC** — практические руководства по внедрению IFRS 9[2][3]
+- **Bank of Russia Working Papers** — исследования PD моделей для российского рынка[4]
 
