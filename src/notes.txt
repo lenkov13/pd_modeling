@@ -1,2 +1,6 @@
 4 FRM - reading 50-52
 Fabozzi - chapter 42
+
+Sorcues with information:
+API MOEX - https://www.moex.com/a2193
+Smartlab - https://smart-lab.ru/
